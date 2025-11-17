@@ -1,0 +1,12 @@
+CREATE DATABASE IF NOT EXISTS maze CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE maze;
+CREATE TABLE IF NOT EXISTS scores (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  seed VARCHAR(191) NOT NULL,
+  steps INT NOT NULL,
+  elapsed INT NOT NULL,
+  player_name VARCHAR(191) NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY idx_seed_time (seed, elapsed, steps)
+) ENGINE=scoresInnoDB DEFAULT CHARSET=utf8mb4;
