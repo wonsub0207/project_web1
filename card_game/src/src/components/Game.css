@@ -1,0 +1,31 @@
+.game-container {
+  max-width: 860px;
+  margin: 20px auto;
+  padding: 8px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  justify-items: center;
+}
+
+.win {
+  margin-top: 16px;
+  font-weight: 600;
+  color: #0b6623;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
