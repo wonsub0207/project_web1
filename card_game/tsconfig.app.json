@@ -1,58 +1,29 @@
-{```jsonc
+// tsconfig.json
 
-  "compilerOptions": {{
-
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",  "compilerOptions": {
-
-    "target": "ES2022",    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-
-    "useDefineForClassFields": true,    "target": "ES2022",
-
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],    "useDefineForClassFields": true,
-
-    "module": "ESNext",    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-
-    "types": [],    "module": "ESNext",
-
-    "skipLibCheck": true,    "types": [],
-
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
     "skipLibCheck": true,
 
     /* Bundler mode */
-
-    "moduleResolution": "bundler",    /* Bundler mode */
-
-    "allowImportingTsExtensions": true,    "moduleResolution": "bundler",
-
-    "verbatimModuleSyntax": true,    "allowImportingTsExtensions": true,
-
-    "moduleDetection": "force",    "verbatimModuleSyntax": true,
-
-    "noEmit": true,    "moduleDetection": "force",
-
-    "jsx": "react-jsx",    "noEmit": true,
-
-    "jsx": "react-jsx",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true, // JSON 파일을 모듈처럼 사용 가능하도록 추가 (필요할 경우)
+    "isolatedModules": true, // 단일 파일 변환 시 발생할 수 있는 오류 방지 (Vite 환경 권장)
+    "noEmit": true,
+  "jsx": "react-jsx", // React JSX를 사용하도록 설정
+  "types": ["vite/client"]
 
     /* Linting */
-
-    "strict": true,    /* Linting */
-
-    "noUnusedLocals": true,    "strict": true,
-
-    "noUnusedParameters": true,    "noUnusedLocals": true,
-
-    "erasableSyntaxOnly": true,    "noUnusedParameters": true,
-
-    "noFallthroughCasesInSwitch": true,    "erasableSyntaxOnly": true,
-
-    "noUncheckedSideEffectImports": true    "noFallthroughCasesInSwitch": true,
-
-  },    "noUncheckedSideEffectImports": true
-
-  "include": ["src"]  },
-
-}  "include": ["src"],
-
-  "references": [{ "path": "./tsconfig.node.json" }]
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true, // 파일 이름 대소문자 일관성 강제
+    "esModuleInterop": true // 모듈 간의 상호 운용성 개선
+  },
+  "include": ["src", "vite-env.d.ts"]
 }
