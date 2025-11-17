@@ -1,29 +1,28 @@
-// tsconfig.json
-
 {
   "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2022",
     "useDefineForClassFields": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
+    "types": ["vite/client"],
     "skipLibCheck": true,
 
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
-    "resolveJsonModule": true, // JSON 파일을 모듈처럼 사용 가능하도록 추가 (필요할 경우)
-    "isolatedModules": true, // 단일 파일 변환 시 발생할 수 있는 오류 방지 (Vite 환경 권장)
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
     "noEmit": true,
-  "jsx": "react-jsx", // React JSX를 사용하도록 설정
-  "types": ["vite/client"]
+    "jsx": "react-jsx",
 
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "forceConsistentCasingInFileNames": true, // 파일 이름 대소문자 일관성 강제
-    "esModuleInterop": true // 모듈 간의 상호 운용성 개선
+    "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "vite-env.d.ts"]
+  "include": ["src"]
 }

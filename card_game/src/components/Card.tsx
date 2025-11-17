@@ -1,27 +1,22 @@
-import React from 'react'
-import './Card.css'
+import type { Card as CardType } from '../types';
+import './Card.css';
 
-type Props = {
-  index: number
-  value: string
-  isFlipped: boolean
-  isMatched: boolean
-  onClick: () => void
+interface CardProps {
+  card: CardType;
+  onClick: (card: CardType) => void;
 }
 
-const Card: React.FC<Props> = ({ value, isFlipped, onClick }) => {
+export function Card({ card, onClick }: CardProps) {
   return (
-    <div className="card-wrapper">
-      <button
-        className={"card" + (isFlipped ? ' flipped' : '')}
-        onClick={onClick}
-        aria-label={isFlipped ? `card ${value}` : 'card back'}
-      >
-        <div className="front">{value}</div>
-        <div className="back">?</div>
-      </button>
-    </div>
-  )
+    <button
+      className={`card ${card.isFlipped ? 'flipped' : ''} ${card.isMatched ? 'matched' : ''}`}
+      onClick={() => onClick(card)}
+      disabled={card.isMatched || card.isFlipped}
+    >
+      <div className="card-inner">
+        <div className="card-front">?</div>
+        <div className="card-back">{card.value}</div>
+      </div>
+    </button>
+  );
 }
-
-export default Card
