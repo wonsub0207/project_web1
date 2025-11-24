@@ -17,9 +17,16 @@ export default function Home() {
 
         <Link
           to="/card"
-          className="px-6 py-3 bg-slate-700 text-slate-400 rounded-2xl text-lg font-semibold cursor-not-allowed"
+          className="px-6 py-3 bg-slate-700 text-slate-400 rounded-2xl text-lg font-semibold"
         >
           🧱 Card game
+        </Link>
+
+        <Link
+          to="/2048"
+          className="px-6 py-3 bg-slate-700 text-slate-400 rounded-2xl text-lg font-semibold"
+        >
+          🧱 2048 game
         </Link>
       </div>
 
