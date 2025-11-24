@@ -118,19 +118,20 @@ app.post("/score", async (req, res) => {
   }
 });
 
-// GET /leaderboard?seed=abc&limit=20
 app.get("/leaderboard", async (req, res) => {
   try {
     const seed = String(req.query.seed ?? "");
     const limit = Math.max(1, Math.min(100, Number(req.query.limit ?? 20)));
-    const [rows] = await pool.execute(
-      `SELECT id, player_name AS name, seed, steps, elapsed, created_at
-       FROM scores
-       WHERE (? = '' OR seed = ?)
-       ORDER BY elapsed ASC, steps ASC, id ASC
-       LIMIT ?`,
-      [seed, seed, limit]
-    );
+
+    const sql = `
+      SELECT id, player_name AS name, seed, steps, elapsed, created_at
+      FROM scores
+      WHERE (? = '' OR seed = ?)
+      ORDER BY elapsed ASC, steps ASC, id ASC
+      LIMIT ${limit}
+    `; // LIMIT은 문자열로 직접 삽입
+
+    const [rows] = await pool.execute(sql, [seed, seed]); // ← 파라미터 2개만
     res.json({ ok: true, items: rows });
   } catch (err) {
     console.error(err);
