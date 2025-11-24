@@ -6,6 +6,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mysql from "mysql2/promise";
+import cardRoutes from "./cardRoutes.js";
 
 dotenv.config();
 
@@ -134,6 +135,52 @@ app.get("/leaderboard", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ ok: false, error: "DB error" });
+  }
+});
+
+app.use("/card", cardRoutes);
+
+app.post("/card-score", async (req, res) => {
+  try {
+    const { player_name, moves, seconds, matches } = req.body;
+
+    if (
+      typeof moves !== "number" ||
+      typeof seconds !== "number" ||
+      typeof matches !== "number"
+    ) {
+      return res.status(400).json({ ok: false, error: "Invalid body" });
+    }
+
+    const [result] = await pool.execute(
+      `INSERT INTO card_scores (player_name, moves, seconds, matches)
+       VALUES (?, ?, ?, ?)`,
+      [player_name || null, moves, seconds, matches]
+    );
+
+    res.json({ ok: true, id: result.insertId });
+  } catch (err) {
+    console.error("card-score error:", err);
+    res.status(500).json({ ok: false, error: "Server error" });
+  }
+});
+
+app.get("/card-leaderboard", async (req, res) => {
+  try {
+    const limit = Number(req.query.limit) || 20;
+
+    const [rows] = await pool.execute(
+      `SELECT id, player_name, moves, seconds, matches, created_at
+       FROM card_scores
+       ORDER BY seconds ASC, moves ASC
+       LIMIT ?`,
+      [limit]
+    );
+
+    res.json({ ok: true, items: rows });
+  } catch (err) {
+    console.error("card-leaderboard error:", err);
+    res.status(500).json({ ok: false, error: "Server error" });
   }
 });
 
