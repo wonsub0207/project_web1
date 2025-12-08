@@ -191,12 +191,12 @@ export default function Game2048() {
           </p>
           {status === "won" && (
             <p className="mt-2 text-emerald-400 text-sm font-semibold">
-              🎉 2048 달성! 계속 플레이하거나 새 게임을 시작할 수 있어요.
+              2048 달성! 계속 플레이하거나 새 게임을 시작할 수 있어요.
             </p>
           )}
           {status === "over" && (
             <p className="mt-2 text-rose-400 text-sm font-semibold">
-              💀 더 이상 움직일 수 없어요. 새 게임으로 다시 도전!
+              더 이상 움직일 수 없어요. 새 게임으로 다시 도전!
             </p>
           )}
         </div>

@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import './index.css';
+import "./index.css";
 import Home from "./Home";
 import MazeGameExpress from "./MazeGameExpress";
 import CardFlipGame from "./CardFlipGame";
